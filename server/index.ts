@@ -96,12 +96,15 @@ app.use((req, res, next) => {
     });
   }
 
-  // /api dışındaki tüm istekler index.html'e yönlensin
-  app.use("*", (req, res) => {
+  const clientBuildPath = path.resolve(__dirname, "../dist");
+  app.use(express.static(clientBuildPath));
+
+  // Tüm bilinmeyen route'lar için React index.html döndür
+  app.get("*", (req, res) => {
     if (req.path.startsWith("/api")) {
       return res.status(404).json({ message: "API endpointi bulunamadı" });
     }
-    res.sendFile(path.resolve(__dirname, "../client/index.html"));
+    res.sendFile(path.join(clientBuildPath, "index.html"));
   });
 
   const port = parseInt(process.env.PORT || '4000', 10);
