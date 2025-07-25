@@ -2,14 +2,8 @@ import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 import * as schema from "@shared/schema";
 
-// PostgreSQL istemcisini oluştur
-export const sql = postgres({
-  host: 'localhost',
-  database: 'admin_panel',
-  username: 'admin_panel_user',
-  password: 'password123',
-  port: 5432
-});
+// PostgreSQL istemcisini environment variable ile oluştur
+export const sql = postgres(process.env.DATABASE_URL!);
 
 // Drizzle ORM'yi PostgreSQL istemcisi ile başlat
 export const db = drizzle(sql, { schema });
