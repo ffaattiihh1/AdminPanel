@@ -1,6 +1,7 @@
 {
   "build": {
     "builder": "NIXPACKS",
-    "buildCommand": "npm install"
+    "buildCommand": "npm run build",
+    "startCommand": "cd dist && npx serve -s -l $PORT"
   }
 }

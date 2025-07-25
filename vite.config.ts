@@ -20,6 +20,13 @@ export default defineConfig({
         ]
       : []),
   ],
+  build: {
+    outDir: path.resolve(__dirname, "dist"),
+    emptyOutDir: true,
+    rollupOptions: {
+      external: ['react-router-dom']
+    }
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "client", "src"),
@@ -28,10 +35,6 @@ export default defineConfig({
     },
   },
   root: path.resolve(__dirname, "client"),
-  build: {
-    outDir: path.resolve(__dirname, "dist/public"),
-    emptyOutDir: true,
-  },
   server: {
     proxy: {
       '/api': 'http://localhost:4000',
